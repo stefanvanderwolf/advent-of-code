@@ -1,4 +1,4 @@
-local parser = require("lib/parser")
+local parser = require("lib.parser")
 
 local p1 = {}
 

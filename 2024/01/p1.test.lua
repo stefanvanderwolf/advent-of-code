@@ -1,4 +1,4 @@
-local p1 = require("./2024/01/p1")
+local p1 = require(".2024.01.p1")
 
 io.write("--- 2024/01/p1.lua ---\n")
 
