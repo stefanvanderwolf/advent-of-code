@@ -1,5 +1,14 @@
 local iterator = {}
 
+iterator.neighbours = {}
+for y = -1, 1 do
+    for x = -1, 1 do
+      if x ~= 0 or y ~= 0 then
+        table.insert(iterator.neighbours, { row = y, col = x })
+      end
+    end
+end
+
 iterator.previous = function(t)
   local length = #t
 

@@ -8,6 +8,18 @@ parser.lines = function(s)
   return string.gmatch(s, "[^\r\n]+")
 end
 
+parser.characters = function(s)
+  local index = 0
+  local len = #s
+
+  return function()
+    index = index + 1
+    if index <= len then
+      return index, string.sub(s, index, index)
+    end
+  end
+end
+
 --- Find all integers in the line
 ---
 --- @examples
