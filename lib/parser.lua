@@ -8,6 +8,18 @@ parser.lines = function(s)
   return string.gmatch(s, "[^\r\n]+")
 end
 
+parser.groups = function(s, separator)
+  return split(s, "\n\n")
+end
+
+function split(input, delimiter)
+    local result = {}
+    for match in (input .. delimiter):gmatch("(.-)" .. delimiter) do
+        table.insert(result, match)
+    end
+    return result
+end
+
 parser.characters = function(s)
   local index = 0
   local len = #s
