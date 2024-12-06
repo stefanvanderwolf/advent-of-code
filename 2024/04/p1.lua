@@ -1,30 +1,31 @@
-local grid = require("lib.grid")
 local iterator = require("lib.iterator")
+local Matrix = require("lib.collection.matrix")
+local Vec2 = require("lib.vec2")
 
 local p1 = {}
 
-local function find(word_search, word)
+--- @param matrix Matrix
+--- @param word string
+local function find(matrix, word)
   local n = 0
   local length = #word
-  for row, line in ipairs(word_search) do
-    for col, character in ipairs(line) do
-      if character == string.sub(word, 1, 1) then
-        for _, direction in ipairs(iterator.neighbours) do
-          for i = 2, length do
-            local d_row = row + (i - 1) * direction.row
-            local d_col = col + (i - 1) * direction.col
-            local target = string.sub(word, i, i)
-            local current = grid.get(word_search, d_row, d_col)
 
-            if current == nil or current ~= target then
-              goto continue
-            end
+  for vec2, character in matrix:iter() do
+    if character == string.sub(word, 1, 1) then
+      for _, direction in ipairs(iterator.neighbours) do
+        for i = 2, length do
+          local row = vec2.y + (i - 1) * direction.row
+          local col = vec2.x + (i - 1) * direction.col
+          local target = string.sub(word, i, i)
+          local current = matrix:get(Vec2.new(col, row))
+          if current == nil or current ~= target then
+            goto continue
           end
-
-          n = n + 1
-
-          ::continue::
         end
+
+        n = n + 1
+
+        ::continue::
       end
     end
   end
@@ -37,9 +38,9 @@ end
 --- @param input string
 --- @return integer
 p1.solve = function(input)
-  local word_search = grid.new(input)
+  local matrix = Matrix.from(input)
 
-  return find(word_search, "XMAS")
+  return find(matrix, "XMAS")
 end
 
 return p1

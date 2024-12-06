@@ -12,7 +12,7 @@ local function parse(input)
   --- @type integer[]
   local right_locations = {}
 
-  for line in parser.lines(input) do
+  for _, line in parser.lines(input) do
     local left, right = unpack(parser.numbers(line))
 
     table.insert(left_locations, left)

@@ -10,8 +10,4 @@ collection.find = function(haystack, needle)
   return nil, nil
 end
 
-collection.swap = function(t, i, j)
-    t[i], t[j] = t[j], t[i]
-end
-
 return collection

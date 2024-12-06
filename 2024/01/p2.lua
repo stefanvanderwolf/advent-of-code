@@ -1,4 +1,4 @@
-local parser = require("lib/parser")
+local parser = require("lib.parser")
 
 local p2 = {}
 
@@ -18,7 +18,7 @@ local function parse(input)
     end
   })
 
-  for line in parser.lines(input) do
+  for _, line in parser.lines(input) do
     local left, right = unpack(parser.numbers(line))
 
     table.insert(locations, left)

@@ -3,9 +3,16 @@ local parser = {}
 --- Create iterator for each line in `s`
 ---
 --- @param s string
---- @return fun():string, ...
 parser.lines = function(s)
-  return string.gmatch(s, "[^\r\n]+")
+  local lines = string.gmatch(s, "[^\r\n]+")
+  local index = 0
+  return function()
+    index = index + 1
+    local line = lines()
+    if line ~= nil then
+      return index, line
+    end
+  end
 end
 
 parser.groups = function(s, separator)

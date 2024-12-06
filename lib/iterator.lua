@@ -9,6 +9,13 @@ for y = -1, 1 do
     end
 end
 
+iterator.diagonals = {
+  { row = -1, col = -1 },
+  { row = 1, col = 1 },
+  { row = 1, col = -1 },
+  { row = -1, col = 1 },
+}
+
 iterator.previous = function(t)
   local length = #t
 

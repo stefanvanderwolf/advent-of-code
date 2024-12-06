@@ -29,7 +29,7 @@ end
 p2.solve = function(input)
   local n = 0
 
-  for line in parser.lines(input) do
+  for _, line in parser.lines(input) do
     local levels = parser.numbers(line)
     if is_safe_with_tolerate(levels) then
       n = n + 1
