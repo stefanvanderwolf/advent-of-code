@@ -1,9 +1,8 @@
+local describe = require("lib.test")
 local p1 = require(".2024.05.p1")
 
-io.write("--- 2024/05/p1.lua ---\n")
-
-do
-  io.write("- example:\n")
+describe("input", function(it)
+  it("example", function()
   local example = [[47|53
 97|13
 97|61
@@ -31,21 +30,21 @@ do
 75,29,13
 75,97,47,61,53
 61,13,29
-97,13,75,29,47
-]]
-  local n = p1.solve(example)
-  local expected = 143
-  assert(n == expected, string.format("Expected %d, but was %d", expected, n))
-  io.write("ok\n")
-end
+97,13,75,29,47]]
+    local expected = 143
 
-do
-  io.write("\n- input: \n")
-  local file = io.open("./2024/05/assets/input.txt", "r")
-  assert(file ~= nil, "Unable to open input")
-  local input = file:read("*a")
-  local n = p1.solve(input)
-  local expected = 4872
-  assert(n == expected, string.format("Expected %d, but was %d", expected, n))
-  io.write("ok\n")
-end
+    local n = p1.solve(example)
+
+    assert(n == expected, string.format("Expected %d, but was %d", expected, n))
+  end)
+
+  it("input", function()
+    local fp = io.open("./2024/05/assets/input.txt", "r") or error("Input not found")
+    local input = fp:read("*a")
+    local expected = 4872
+
+    local n = p1.solve(input)
+
+    assert(n == expected, string.format("Expected %d, but was %d", expected, n))
+  end)
+end)
