@@ -47,10 +47,14 @@ end
 ---
 --- @param s string
 --- @return integer[]
-parser.numbers = function(s)
+parser.numbers = function(s, single)
+  local pattern = "%d+"
+  if single or false then
+    pattern = "%d"
+  end
   --- @type integer[]
   local integers = {}
-  for num in s:gmatch("%d+") do
+  for num in s:gmatch(pattern) do
     table.insert(integers, tonumber(num))
   end
   return integers
