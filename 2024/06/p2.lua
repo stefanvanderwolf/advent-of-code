@@ -51,6 +51,7 @@ local function obstructions(matrix, guard, obstruction)
   local direction = directions_iter()
 
   local visited = Set.from({ Vec4.new(location.x, location.y, direction.x, direction.y) })
+  local turned = false
 
   while true do
     local new_location = location + direction
@@ -62,6 +63,7 @@ local function obstructions(matrix, guard, obstruction)
 
     if peek == "#" or obstruction == new_location then
       direction = directions_iter()
+      turned = true
     else
       location = new_location
 
@@ -69,7 +71,11 @@ local function obstructions(matrix, guard, obstruction)
       if visited:contains(updated) then
         return 1
       end
-      visited:insert(updated)
+
+      if turned then
+        visited:insert(updated)
+      end
+      turned = false
     end
   end
 end
