@@ -1,0 +1,21 @@
+{
+  "name": "advent-of-code",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Advent of code",
+  "scripts": {
+    "clean": "rimraf ./*.tsbuildinfo ./dist ./coverage",
+    "compile": "tsc --build tsconfig.build.json",
+    "watch": "tsc-watch --build tsconfig.json --preserveWatchOutput",
+    "start": "node --enable-source-maps --test",
+    "start:dev": "npm run watch -- --onSuccess 'npm run start'"
+  },
+  "author": "Stefan van der Wolf",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsc-watch": "^6.2.1",
+    "typescript": "~5.5.4"
+  }
+}
