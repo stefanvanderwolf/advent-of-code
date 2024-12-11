@@ -2,8 +2,14 @@ import { Node } from "./node.js";
 
 export class LinkedList<Element> {
   head: Node<Element> | null;
-  // @todo should this be a WeakRef?
-  tail: Node<Element> | null;
+
+  private _tail: WeakRef<Node<Element>> | null = null;
+  get tail(): Node<Element> | null {
+    return this._tail?.deref() ?? null;
+  }
+  set tail(node: Node<Element> | null) {
+    this._tail = node != null ? new WeakRef(node) : null;
+  }
 
   constructor() {
     this.head = null;
@@ -37,17 +43,19 @@ export class LinkedList<Element> {
     * @time: O(1)
     * @memory: O(1)
     */
-  append(element: Element) {
+  append(element: Element): Node<Element> {
     // Note: not using `isEmpty` so Typescript can statically see that tail is
     // defined.
     if (!this.tail) {
-      this.push(element)
+      return this.push(element);
     } else {
       // Make a new tail and set the previous to the current tail.
       const node = new Node(this.tail, element, null)
 
       this.tail.next = node;
       this.tail = node;
+
+      return node;
     }
   }
 
@@ -57,7 +65,7 @@ export class LinkedList<Element> {
     * @time: O(1)
     * @memory: O(1)
     */
-  push(element: Element) {
+  push(element: Element): Node<Element> {
     const node = new Node(null, element, null)
 
     if (this.head) {
@@ -68,6 +76,8 @@ export class LinkedList<Element> {
       this.head = node
       this.tail = node
     }
+
+    return node;
   }
 
   insert(element: Element, after: Node<Element>) {

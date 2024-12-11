@@ -21,51 +21,81 @@ describe(LinkedList.name, () => {
     });
   });
 
-  it('should push elements to the beginning of the list', () => {
-    const list = new LinkedList();
-    list.push(1);
-    list.push(2);
+  describe("push", () => {
+    it('should push elements to the beginning of the list', () => {
+      const list = new LinkedList();
+      list.push(1);
+      list.push(2);
 
-    assert.strictEqual(list?.head?.element, 2);
-    assert.strictEqual(list?.tail?.element, 1);
-    assert.strictEqual(list?.head?.next, list.tail);
-    assert.strictEqual(list?.tail?.previous, list.head);
+      assert.strictEqual(list?.head?.element, 2);
+      assert.strictEqual(list?.tail?.element, 1);
+      assert.strictEqual(list?.head?.next, list.tail);
+      assert.strictEqual(list?.tail?.previous, list.head);
+    });
   });
 
-  it('should append elements to the end of the list', () => {
-    const list = new LinkedList();
-    list.append(1);
-    list.append(2);
+  describe("insert", () => {
+    it('should insert element as the new tail', () => {
+      const list = new LinkedList();
+      const node = list.append(1)
+      list.insert(2, node)
 
-    assert.strictEqual(list?.head?.element, 1);
-    assert.strictEqual(list?.tail?.element, 2);
-    assert.strictEqual(list?.head.next, list.tail);
-    assert.strictEqual(list?.tail.previous, list.head);
+      assert.strictEqual(list?.head?.element, 1);
+      assert.strictEqual(list?.head?.next?.element, 2);
+      assert.strictEqual(list?.tail?.element, 2);
+    });
+
+    it('should insert element after the node', () => {
+      const list = new LinkedList();
+      const node = list.append(1)
+      list.append(3)
+      list.insert(2, node)
+
+      assert.strictEqual(list?.head?.element, 1);
+      assert.strictEqual(list?.head?.next?.element, 2);
+      assert.strictEqual(list?.head?.next?.next?.element, 3);
+    });
   });
 
+  describe("append", () => {
+    it('should append elements to the end of the list', () => {
+      const list = new LinkedList();
+      list.append(1);
+      list.append(2);
 
-  it('should pop elements from the end of the list', () => {
-    const list = new LinkedList();
-    list.push(1);
-    list.push(2);
-    const popped = list.pop();
-
-    assert.strictEqual(popped?.element, 1);
-    assert.strictEqual(list?.tail?.element, 2);
-    assert.strictEqual(list?.tail?.next, null);
+      assert.strictEqual(list?.head?.element, 1);
+      assert.strictEqual(list?.tail?.element, 2);
+      assert.strictEqual(list?.head.next, list.tail);
+      assert.strictEqual(list?.tail.previous, list.head);
+    });
   });
 
-  it('should allow iteration through the list', () => {
-    const list = new LinkedList();
-    list.push(1);
-    list.push(2);
-    list.push(3);
+  describe("pop", () => {
+    it('should pop elements from the end of the list', () => {
+      const list = new LinkedList();
+      list.push(1);
+      list.push(2);
+      const popped = list.pop();
 
-    const elements = [];
-    for (const node of list) {
-      elements.push(node.element);
-    }
+      assert.strictEqual(popped?.element, 1);
+      assert.strictEqual(list?.tail?.element, 2);
+      assert.strictEqual(list?.tail?.next, null);
+    });
+  });
 
-    assert.deepStrictEqual(elements, [3, 2, 1]);
+  describe("iterator", () => {
+    it('should allow iteration through the list', () => {
+      const list = new LinkedList();
+      list.push(1);
+      list.push(2);
+      list.push(3);
+
+      const elements = [];
+      for (const node of list) {
+        elements.push(node.element);
+      }
+
+      assert.deepStrictEqual(elements, [3, 2, 1]);
+    });
   });
 });
