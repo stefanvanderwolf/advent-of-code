@@ -53,8 +53,8 @@ export class Matrix<Element> {
     return buffer;
   }
 
-  static from(input: string): Matrix<string> {
-    const matrix = new Matrix<string>();
+  static from<Element>(input: string, decoder: (s: string) => Element): Matrix<Element> {
+    const matrix = new Matrix<Element>();
     for (const [row, line] of input.split("\n").entries()) {
       // Prevent copy paste errors with empty lines at the end of the input.
       if (line.length === 0) {
@@ -66,7 +66,7 @@ export class Matrix<Element> {
 
       const items = []
       for (const [_, character] of line.split("").entries()) {
-        items.push(character)
+        items.push(decoder(character))
       }
       matrix.buffer.push(items)
     }
