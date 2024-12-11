@@ -70,6 +70,19 @@ export class LinkedList<Element> {
     }
   }
 
+  insert(element: Element, after: Node<Element>) {
+    const node = new Node(after, element, null)
+
+    const tmp = after.next;
+    if (tmp) {
+      after.next = node
+      node.next = tmp
+      tmp.previous = node;
+    } else {
+      this.append(element);
+    }
+  }
+
   /**
     * Pop the tail of the list and return it.
     *
@@ -89,5 +102,15 @@ export class LinkedList<Element> {
     }
 
     return node;
+  }
+
+  toString(): string {
+    let result = `LinkedList { `
+    for (const node of this) {
+      result += `${node.element},`
+
+    }
+    result += `}`
+    return result;
   }
 }
