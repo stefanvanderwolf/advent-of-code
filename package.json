@@ -5,11 +5,20 @@
   "version": "0.0.1",
   "description": "Advent of code",
   "scripts": {
-    "clean": "rimraf ./*.tsbuildinfo ./dist ./coverage",
-    "compile": "tsc --build tsconfig.build.json",
+    "clean": "rm -rf ./*.tsbuildinfo ./dist ./coverage",
+    "compile": "tsc --build tsconfig.json",
     "watch": "tsc-watch --build tsconfig.json --preserveWatchOutput",
-    "start": "node --enable-source-maps --test",
-    "start:dev": "npm run watch -- --onSuccess 'npm run start'"
+
+    "prestart": "npm run compile",
+    "start": "node --enable-source-maps",
+
+    "pretest": "npm run compile",
+    "test": "node --enable-source-maps --test",
+
+    "latest": "npm run $(./bin/find-latest.sh)",
+    "latest:dev": "npm run watch -- --onSuccess 'npm run latest'",
+    "latest:test": "npm run test -- dist/$(./bin/find-latest.sh).test.js",
+    "latest:test:dev": "npm run watch -- --onSuccess 'npm run latest:test'"
   },
   "author": "Stefan van der Wolf",
   "license": "ISC",

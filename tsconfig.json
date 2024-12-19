@@ -1,4 +1,7 @@
 {
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -9,11 +12,14 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "strict": true,
-    "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "module": "NodeNext",
     "outDir": "dist",
     "sourceMap": true,
-    "lib": ["es2023"]
+    "lib": [
+      "es2023"
+    ],
+    "experimentalDecorators": true,
+    "rootDir": "./src"
   }
 }
