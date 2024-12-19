@@ -2,7 +2,7 @@
   "name": "advent-of-code",
   "private": true,
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Advent of code",
   "scripts": {
     "clean": "rm -rf ./*.tsbuildinfo ./dist ./coverage",
@@ -18,7 +18,9 @@
     "latest": "npm run $(./bin/find-latest.sh)",
     "latest:dev": "npm run watch -- --onSuccess 'npm run latest'",
     "latest:test": "npm run test -- dist/$(./bin/find-latest.sh).test.js",
-    "latest:test:dev": "npm run watch -- --onSuccess 'npm run latest:test'"
+    "latest:test:dev": "npm run watch -- --onSuccess 'npm run latest:test'",
+
+    "202401": "npm run start -- ./dist/202401.js"
   },
   "author": "Stefan van der Wolf",
   "license": "ISC",
