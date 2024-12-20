@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { distance, p1, p2, parse } from "./202401.js";
+import { p1, p2, parse } from "./202401.js";
 import { read } from "./lib/main.js";
 
 describe(import.meta.filename, () => {
@@ -47,22 +47,6 @@ describe(import.meta.filename, () => {
 
       assert.strictEqual(n, 226460700);
     });
-
-    describe(distance.name, () => {
-      const tests: [left: number, right: number, expected: number][] = [
-        [3, 1, 2],
-        // Added data where left location is lower than right.
-        [2, 7, 5],
-      ];
-
-      for (const [left, right, expected] of tests) {
-        it(`should have distance ${expected} between ${left} and ${right}`, () => {
-          const result = distance(left, right);
-
-          assert.strictEqual(result, expected);
-        });
-      }
-    })
   });
 
   describe(p2.name, () => {

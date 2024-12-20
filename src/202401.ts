@@ -1,6 +1,7 @@
 import { Main } from "./lib/main.js";
 import assert from "node:assert";
 import { EOL } from "os";
+import { distance } from "./lib/number.js";
 
 Main(parse, p1, p2, import.meta.url);
 
@@ -53,14 +54,6 @@ export function p1(locations: Locations): number {
 
   return n;
 };
-
-/**
-  * Calculates distance between `left` and `right` location.
-  */
-export function distance(left: number, right: number): number {
-  // Use `Math.abs` in case left location is lower than the right location.
-  return Math.abs(left - right);
-}
 
 /**
   * Solve the total similarities.
