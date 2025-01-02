@@ -2,24 +2,21 @@
   "name": "advent-of-code",
   "private": true,
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Advent of code",
   "scripts": {
-    "clean": "rm -rf ./*.tsbuildinfo ./dist ./coverage",
-    "compile": "tsc --build tsconfig.json",
     "watch": "tsc-watch --build tsconfig.json --preserveWatchOutput",
-
-    "prestart": "npm run compile",
-    "start": "node --enable-source-maps",
-
-    "pretest": "npm run compile",
     "test": "node --enable-source-maps --test",
-
-    "latest": "npm run $(./bin/find-latest.sh)",
-    "latest:dev": "npm run watch -- --onSuccess 'npm run latest'",
-    "latest:test": "npm run test -- dist/$(./bin/find-latest.sh).test.js",
+    "start": "node --enable-source-maps",
+    "pretest": "npm run compile",
+    "prestart": "npm run compile",
     "latest:test:dev": "npm run watch -- --onSuccess 'npm run latest:test'",
-
+    "latest:test": "npm run test -- dist/$(./bin/find-latest.sh).test.js",
+    "latest:dev": "npm run watch -- --onSuccess 'npm run latest'",
+    "latest": "npm run $(./bin/find-latest.sh)",
+    "compile": "tsc --build tsconfig.json",
+    "clean": "rm -rf ./*.tsbuildinfo ./dist ./coverage",
+    "202402": "npm run start -- ./dist/202402.js",
     "202401": "npm run start -- ./dist/202401.js"
   },
   "author": "Stefan van der Wolf",
