@@ -2,7 +2,7 @@
   "name": "advent-of-code",
   "private": true,
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Advent of code",
   "scripts": {
     "watch": "tsc-watch --build tsconfig.json --preserveWatchOutput",
@@ -16,6 +16,7 @@
     "latest": "npm run $(./bin/find-latest.sh)",
     "compile": "tsc --build tsconfig.json",
     "clean": "rm -rf ./*.tsbuildinfo ./dist ./coverage",
+    "202403": "npm run start -- ./dist/202403.js",
     "202402": "npm run start -- ./dist/202402.js",
     "202401": "npm run start -- ./dist/202401.js"
   },

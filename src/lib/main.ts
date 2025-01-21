@@ -4,10 +4,10 @@ import path from "node:path";
 /**
   * Call the `fn` right away when the current file is the main file.
   */
-export async function Main<Parsed>(
+export async function Main<Parsed, Output>(
   parse: (input: string) => Parsed,
-  p1: (input: Parsed) => void,
-  p2: (input: Parsed) => void,
+  p1: (input: Parsed) => Output,
+  p2: (input: Parsed) => Output,
   callee: string
 ): Promise<void> {
   // Coming in from calling `node main.js`. The argument will be the full path.
