@@ -1,0 +1,15 @@
+{
+        "name": "advent-of-code",
+        "version": "0.0.0",
+        "description": "Advent of code",
+        "license": "ISC",
+        "author": "Stefan van der Wolf",
+        "type": "module",
+        "scripts": {
+                "start": "node --experimental-strip-types --disable-warning=ExperimentalWarning"
+        },
+        "devDependencies": {
+                "@types/node": "^24.3.0",
+                "typescript": "^5.9.2"
+        }
+}
