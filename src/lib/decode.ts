@@ -29,13 +29,13 @@ export function int(str: string): number {
 
 
 export function union<
-T extends readonly string[]
+T extends readonly (string | number)[]
 >(
-        value: unknown,
+        value: string | number | undefined,
         options: T
 ): T[number] {
         assert(
-                typeof value === "string" && options.includes(value),
+                value !== undefined && options.includes(value),
                 `Invalid union value: ${value}, expected one of: ${options.join(", ")}`
         )
 
