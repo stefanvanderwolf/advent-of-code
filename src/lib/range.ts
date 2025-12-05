@@ -1,8 +1,10 @@
 import assert from "node:assert";
 
+import * as decode from "./decode.ts";
+
 export default class Range {
-        public readonly lowerbound: number;
-        public readonly upperbound: number;
+        public lowerbound: number;
+        public upperbound: number;
 
         public constructor([lowerbound, upperbound]: [number, number]) {
                 assert(
@@ -12,6 +14,42 @@ export default class Range {
 
                 this.lowerbound = lowerbound;
                 this.upperbound = upperbound;
+        }
+
+        public static fromString(str: string, delimeter: string = "-"): Range {
+                return new Range(decode.int2(str, delimeter));
+        }
+
+        /**
+         * Merges overlapping and adjacent ranges.
+         */
+        public static merge(ranges: readonly Range[]): Range[] {
+                const sorted = ranges.toSorted(
+                        (a, b) => a.lowerbound - b.lowerbound
+                )
+
+                let [current, ...rest] = sorted;
+                if (current === undefined)
+                        return [];
+
+                const merged: Range[] = [];
+                for (const next of rest) {
+                        if (next.lowerbound <= current.upperbound + 1) {
+                                // Merge overlapping/contiguous ranges
+                                current.upperbound = Math.max(current.upperbound, next.upperbound);
+                        } else {
+                                merged.push(current);
+                                current = next;
+                        }
+                }
+
+                merged.push(current);
+
+                return merged;
+        }
+
+        public contains(value: number): boolean {
+                return this.lowerbound <= value && value <= this.upperbound;
         }
 
         [Symbol.iterator]() {
