@@ -13,9 +13,10 @@ export function int2(str: string, delimeter: string = ","): [number, number] {
         return [a, b];
 }
 
-export function ints(str: string, delimeter: string = ","): number[] {
+export function ints(str: string, delimeter: string | RegExp = ","): number[] {
         return str
                 .split(delimeter)
+                .filter((part) => part.length > 0)
                 .map((part) => int(part));
 }
 
